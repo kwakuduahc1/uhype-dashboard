@@ -1,0 +1,15 @@
+---
+title: "A cross-sectional study into the expression of finacial challenges as expressed by ambulant hypertensive patients in Ghana"
+author: "Author Information"
+format: html
+---
+
+## Introduction
+
+Most of the cardiovascular morbidities worldwide are caused by hypertension or high blood pressure [@curado2021; @Mahmood2020; @Mills2020; @Treciokiene] and almost a billion people in the world have hypertension @Treciokiene. Hypertension is estimated to affect 13% of Ghanaian @Olutobi2018. The detection, treatment, and control of hypertension has been described as poor in Sub-Saharan Africa (SSA)[@Cappuccio2016; @Athanasakis2017; @Mills2020]. Demographic characteristics, particularly age and educational level, have been identified as the major risk factors for developing high blood pressure [@Khan2021]; @Matei2018]. There is a strong bi-directional correlation between poverty and Non-Communicable Diseases (NCD's) [@WHO2017; @Oh2022; @Brummette2019; @Wang2021]. NCD pose serious threats to the financial stability of individuals and their families @Adane.
+
+Direct medical cost has been identified to be the biggest component of total patient cost while seeking care for hypertension @Adane2020. Drug expenditures, of the total direct expenditure, are responsible for an increasing proportion of health costs, accounting for \$1.1 trillion in annual expenditure worldwide @Athanasakis2017. Studies have shown a higher healthcare cost burden for hypertensive patients than non-hypertensive patients [@Wang2021; @zhang2020; @Valero-Elizondo2016;]. The presence of a co-morbidity further exacerbates costs associated with the management of hypertension @Zhang2020. In Australia, Out-of-pocket payments alone is estimated to cost patients AUS 941 million per annum @Adams2020. A study in Columbia estimated direct cost of hypertension care to cost households \$12,255.59 per annum @Londono2020. In Ethiopia, a study estimated the total direct cost to patients to be USD 64 837.48 @Sorato2022 Patient behaviors such as adherence to treatment strongly affect healthcare expenditure due to hypertension @Petersen2021. It is no surprise therefore that there has been several attempts in many countries to identify the ideal cost mechanisms to reduce the burden on hypertensive patients and the healthcare system in general[@Jay2021; @Wright2022; @Treciokiene2021; @Hannan; @oti2016].
+
+In Ghana, the National Health Insurance Scheme (NHIS) has provided financial cost protection for most people, particularly children and people with chronic diseases through Ghana-Diagnostic Related Grouping) payments to hospitals. However, the NHIS has been shown to be inadequate in providing financial protections for subscribers [@De-Graft2014; @Olutobi2018]
+
+Very few studies in Ghana has examined the financial or cost burden of hypertension patients
