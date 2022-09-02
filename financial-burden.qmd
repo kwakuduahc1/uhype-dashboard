@@ -1,15 +1,68 @@
 ---
-title: "A cross-sectional study into the expression of finacial challenges as expressed by ambulant hypertensive patients in Ghana"
+title: "A cross-sectional study into the expression of financial challenges as expressed by ambulant hypertensive patients in Ghana"
 author: "Author Information"
-format: html
+echo: false
+warning: false
+message: false
+tab-align: left
+format: 
+    html:
+        standalone: true
+        self-contained: false
 ---
 
 ## Introduction
 
-Most of the cardiovascular morbidities worldwide are caused by hypertension or high blood pressure [@curado2021; @Mahmood2020; @Mills2020; @Treciokiene] and almost a billion people in the world have hypertension @Treciokiene. Hypertension is estimated to affect 13% of Ghanaian @Olutobi2018. The detection, treatment, and control of hypertension has been described as poor in Sub-Saharan Africa (SSA)[@Cappuccio2016; @Athanasakis2017; @Mills2020]. Demographic characteristics, particularly age and educational level, have been identified as the major risk factors for developing high blood pressure [@Khan2021]; @Matei2018]. There is a strong bi-directional correlation between poverty and Non-Communicable Diseases (NCD's) [@WHO2017; @Oh2022; @Brummette2019; @Wang2021]. NCD pose serious threats to the financial stability of individuals and their families @Adane.
+Most of the cardiovascular morbidities worldwide are caused by hypertension or high blood pressure [@curado2021; @Mahmood2020; @Mills2020; @Treciokiene] and almost a billion people in the world have hypertension @Treciokiene. Demographic characteristics, particularly age and educational level, have been identified as the major risk factors for developing high blood pressure [@Khan2021]; @Matei2018]. There is a strong bi-directional correlation between poverty and Non-Communicable Diseases (NCDs) [@WHO2017; @Oh2022; @Brummette2019; @Wang2021] as NCDs pose serious threats to the financial stability of individuals and their families @Adane.
 
-Direct medical cost has been identified to be the biggest component of total patient cost while seeking care for hypertension @Adane2020. Drug expenditures, of the total direct expenditure, are responsible for an increasing proportion of health costs, accounting for \$1.1 trillion in annual expenditure worldwide @Athanasakis2017. Studies have shown a higher healthcare cost burden for hypertensive patients than non-hypertensive patients [@Wang2021; @zhang2020; @Valero-Elizondo2016;]. The presence of a co-morbidity further exacerbates costs associated with the management of hypertension @Zhang2020. In Australia, Out-of-pocket payments alone is estimated to cost patients AUS 941 million per annum @Adams2020. A study in Columbia estimated direct cost of hypertension care to cost households \$12,255.59 per annum @Londono2020. In Ethiopia, a study estimated the total direct cost to patients to be USD 64 837.48 @Sorato2022 Patient behaviors such as adherence to treatment strongly affect healthcare expenditure due to hypertension @Petersen2021. It is no surprise therefore that there has been several attempts in many countries to identify the ideal cost mechanisms to reduce the burden on hypertensive patients and the healthcare system in general[@Jay2021; @Wright2022; @Treciokiene2021; @Hannan; @oti2016].
+Direct medical cost is the biggest cost component for patients seeking healthcare for hypertension @Adane2020. Drug expenditures, of the total direct expenditure, are responsible for an increasing proportion of health costs, accounting for United States Dollars (USD) 1.1 trillion in annual expenditure worldwide @Athanasakis2017. Among NCD sufferers, it has been documented that hypertensive patients particularly have a higher cost burden compared to non-hypertensive patients [@Wang2021; @zhang2020; @Valero-Elizondo2016;]. The presence of a co-morbidity further exacerbates costs associated with the management of hypertension @Zhang2020. Among several factors, patient behaviors, such as adherence to treatment strongly affect healthcare expenditure due to hypertension @Petersen2021.
 
-In Ghana, the National Health Insurance Scheme (NHIS) has provided financial cost protection for most people, particularly children and people with chronic diseases through Ghana-Diagnostic Related Grouping) payments to hospitals. However, the NHIS has been shown to be inadequate in providing financial protections for subscribers [@De-Graft2014; @Olutobi2018]
+In Australia, Out-of-pocket payment (OOP) alone is estimated to cost patients  941 million Australian dollar (AUS) per annum @Adams2020. A study in Columbia estimated the direct cost of hypertension care to cost households $12,255.59 per annum @Londono2020. In Ethiopia, Sorato (2022) estimated the total direct cost to patients to be USD 64,837.48 @Sorato2022.
 
-Very few studies in Ghana has examined the financial or cost burden of hypertension patients
+It is no surprise therefore that there have been several attempts worlwide to identify the ideal cost mechanisms to reduce the burden on hypertensive patients and the healthcare system in general[@Jay2021; @Wright2022; @Treciokiene2021; @Hannan; @oti2016].
+
+The detection, treatment, and control of hypertension have been described as poor in Sub-Saharan Africa (SSA)[@Cappuccio2016; @Athanasakis2017; @Mills2020]. Hypertension is estimated to affect 13% of Ghanaians @Olutobi2018. community studies. 
+
+Even though, the National Health Insurance Scheme (NHIS) provides financial cost protection for most people, particularly children and people with chronic diseases through the Ghana-Diagnostic Related Grouping (G-DRG) payment mechanism to hospitals, a good number of Ghanaians have still not subscribed [@Sarkodie2021; @Olutibi2018] owing principally to affordability @Kusi2015 and a poor understanding of social health insurance [@Kusi2015; @KontoAgnes2017]. These factors often lead to catastrophic and impoverishing health expenditure for non-subscribers. That notwithstanding, the NHIS subscribers are not spared OOP while seeking health care. The  NHIS has been shown to be inadequate in providing financial protections for subscribers [@De-Graft2014; @Sarkodie2021] and OOP is still high among subscribers, sometimes paying fully @AduSarkodie2021. Frequent drug stock-outs @Olutibi2018 and delayed reimbursement to providers [@CitiFM2022; @AgyepongIrene] have resulted in situations where patients have to either buy their drugs from private pharmacies or make partial or full payments for services at the hospital @Olutibi2018.
+
+It is important therefore the financial burden experienced by hypertensive patients is look at in Ghana. A study in Accra, Ghana, revealed 19.4% OOP rate among hypertensive patients while acquiring their drugs. As much as 40% could not afford their medication when they went to a private pharmacy to acquire their drugs and a further 25.3% could not afford their drugs at the hospital's pharmacy. It is imperative therefore the situation is further examined in more context in the country. This study examines the expression of financial difficulties or otherwise of hypertensive patients in 4 public hospitals in Kumasi and the patient characteristics that can explain the expression of hardships.
+
+## Methodology
+
+The patients were attending routine medical care and were recruited as part of the uHype study. The patients were asked as part of the questionnaire whether they experienced financial challenges accessing medical care including drugs and laboratory. Patient characteristics such as age and the presence of co-morbidities were recorded.
+
+Ethical approval for the study was obtained from the Ghana Health service and the ethical board of the Kwame Nkrumah University of Science and Technology. A prior approval was obtained separately from each hospital before data collection began. Data collection assistants were trained and supervised to collect data using a REDCap @redcap server. All patients were consented before data collection began.
+
+Data entry assistants were recruited and trained on the use of REDCap for data entry. The data entry assistants under the supervision of the team collected the data into the server. 
+
+### Statistical analysis
+After the data collection, the data was exported to R @R where statistical analyses were performed. All packages used are cited in the references. The outcome variables for the study were derived from 3 related questions. One question elicited from patients whether they have financial difficulties attending the hospital for routine care. The other 2 questions asked whether there was a financial difficulty acquiring medications or laboratory services.
+
+We built a logistic regression model with the outcome predictor being the expression of financial difficulties as a result of the HBP. We used 450 patient records to build the regression model. We started with the null model added variables and interactions until such a time the model Akaike information criterion AIC) did not significantly change. Once a model was obtained, we used it to predict the outcome for the remaining 36 patients. These steps were repeated until the model successfully predicted the outcome for all 36 patient. 
+
+## Results
+
+```{r}
+library(ggpubr)
+library(gtsummary)
+library(tidyverse)
+uhype <- read_rds("uhype20Aug2022.rds")
+```
+
+```{r}
+dems <- uhype %>% 
+  select(site, age, sex, educ, occup: no_occup) %>% 
+  tbl_summary(
+    missing = "no"
+  )
+```
+
+There were `r nrow(uhype)` patients recruited into the study. The study participants were recruited from 4 sites in the Kumasi metropolis (@tbl-dem). Most (`r inline_text(dems, variable = site, level = 2)`) were from the Komfo Anokye Teaching hospital and the Ejisu government hospital had the lowest representation (`r inline_text(dems, variable = site, level = 1)`). The median (IQR) age of the study participants was `r inline_text(dems, variable = age)`. There were more females than males in the study (`r inline_text(dems, variable = sex, level = 1)`)
+
+```{r #dem-tbl}
+#| label: tbl-dem
+#| tbl-cap: "Demographic characteristics of patients"
+
+dems %>% 
+  as_gt()
+```

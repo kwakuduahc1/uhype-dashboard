@@ -1,0 +1,24 @@
+---
+title: "Table cross referencing"
+format: html
+---
+```{r}
+#| label: mytable
+#| tbl-cap: "My wonderful table"
+
+mtcars |> head() |> knitr::kable()
+```
+
+See @mytable will not work
+
+*However*
+
+```{r}
+#| label: tbl-mytable
+#| tbl-cap: "My wonderful table"
+
+mtcars |> head() |> knitr::kable()
+
+```
+
+See @tbl-mytable works
