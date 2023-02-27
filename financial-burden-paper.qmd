@@ -1,0 +1,125 @@
+---
+title: "A cross-sectional study into the expression of financial challenges as expressed by ambulant hypertensive patients in Ghana"
+author: "Author Information"
+echo: false
+warning: false
+message: false
+fontsize: "12"
+bibliography: references.bib
+csl: plos-one.csl
+citation: true
+citations-hover: true
+format: 
+    html:
+      toc: true
+      self-contained: true
+---
+
+## Introduction
+
+Most of the cardiovascular morbidities worldwide are caused by hypertension or high blood pressure [@curado_direct_2021;@mahmood_association_2020;@mills_global_2020;@treciokiene_healthcare_2021] and almost a billion people in the world have hypertension @treciokiene_healthcare_2021. Demographic characteristics, particularly age and educational level, have been identified as the major risk factors for developing high blood pressure \[@khan_prevalence_2021;@matei_relationship_2018\]. There is also a strong bi-directional correlation between poverty and Non-Communicable Diseases (NCDs) [@WHO2017;@Oh2022, @brummett_systolic_2019;@wang_association_2021] as NCDs pose serious threats to the financial stability of individuals and their families @adane_cost_2020.
+
+Direct medical cost is the biggest cost component for patients seeking medical care for hypertension @adane_cost_2020. Drug expenditure, of the total direct expenditure, are responsible for an increasing proportion of health costs, accounting for United States Dollars (USD) 1.1 trillion in annual expenditure worldwide @athanasakis_socioeconomic_2017 Among NCD sufferers, it has been documented that hypertensive patients particularly have a higher cost burden compared to non-hypertensive patients [@wang_association_2021;\@zhang_research_2020;@valero-elizondo_favorable_2016]. The presence of a co-morbidity further exacerbates costs associated with the management of hypertension @zhang_research_2020 Among several factors, patient behaviors, such as adherence to treatment strongly affect healthcare expenditure due to hypertension @petersen_strategies_2021 Patients who had financial difficulties were also less likely to honor scheduled clinic visits @michael_prevalence_2021.
+
+In Australia, Out-of-pocket payment (OOP) alone is estimated to cost patients 941 million Australian dollar (AUS) per annum @adams_health_2020 A study in Columbia estimated the direct cost of hypertension care to cost households \$12,255.59 per annum @londono_agudelo_out--pocket_2020 . In Ethiopia, Sorato (2022) estimated the total direct cost to patients to be USD 64,837.48 @sorato_societal_2022 Kohli-Lynch (2022) estimated cost South Africans US\$0.711 billion annually @kohli-lynch_hypertension_2022
+
+It is no surprise therefore that there have been several attempts worldwide to identify the ideal cost mechanisms to reduce the burden on hypertensive patients and the healthcare system in general[@jay_cost-effectiveness_2021;\@wright_co-created_2022;@treciokiene_healthcare_2021; @hannan_improving_2022;\@oti_outcomes_2016]. The detection, treatment, and control of hypertension have been described as poor in Sub-Saharan Africa (SSA)[@Cappuccio2016;@Athanasakis2017;@Mills2020]. A global analysis of the situation by @Margan2017 revealed huge disparities in the accessibility and affordability of HBP control medications. Residents in the upper income countries had access and could afford 2 or more drug classes thereby having optimal clinical outcomes compared to residents in lower income countries who had lesser access to BP medications and could not often affor their BPs. Hence, the blood pressure of residents in LMICs were often poorly controlled.
+
+Hypertension is estimated to affect 13% of Ghanaians @Olutobi2018. Even though, the National Health Insurance Scheme (NHIS) provides financial cost protection for most people, particularly children and people with chronic diseases through the Ghana-Diagnostic Related Grouping (G-DRG) payment mechanism to hospitals, a good number of Ghanaians have still not subscribed [@Sarkodie2021;@Olutibi2018] owing principally to affordability @Kusi2015 and a poor understanding of social health insurance [@Kusi2015;@KontoAgnes2017]. Again, not all HBP medications are covered by the NHIS. In other instances too, the amount reimbursable is lower than the market price of the drugs @Harisson2021. These factors often lead to catastrophic and impoverishing health expenditure for non-subscribers. That notwithstanding, the NHIS subscribers are not spared OOP while seeking health care. The NHIS has been shown to be inadequate in providing financial protections for subscribers [@De-Graft2014;@Sarkodie2021] and OOP is still high among subscribers, sometimes paying fully @AduSarkodie2021. Frequent drug stock-outs @Olutibi2018 and delayed reimbursement to providers [@CitiFM2022;@AgyepongIrene] have resulted in situations where patients have to either buy their drugs from private pharmacies or make partial or full payments for services at the hospital @Olutibi2018.
+
+Poor households are often not able to afford their medications and given that access and affordability to HBP medications is linked to clinical outcome, it is important the financial burden experienced by hypertensive patients is examined critically in Ghana and other LMICs. A study in Accra, Ghana, revealed 19.4% OOP rate among hypertensive patients while acquiring their drugs. As much as 40% could not afford their medication when they went to a private pharmacy to acquire their drugs and a further 25.3% could not afford their drugs at the hospital's pharmacy @Harrison. This study examines the expression of financial difficulties or otherwise of hypertensive patients in 4 public hospitals in Kumasi and the patient characteristics associated with the experience of financial difficulties in accessing healthcare.
+
+## Methodology
+
+The patients were attending routine medical care and were recruited as part of the uHype study. The patients were asked as part of the questionnaire whether they experienced financial challenges accessing medical care including drugs and laboratory. Patient characteristics such as age and the presence of co-morbidities were recorded.
+
+Ethical approval for the study was obtained from the Ghana Health service and the ethical board of the Kwame Nkrumah University of Science and Technology. A prior approval was obtained separately from each hospital before data collection began. Data collection assistants were trained and supervised to collect data using a REDCap @redcap server. All patients were consented before data collection began.
+
+Data entry assistants were recruited and trained on the use of REDCap for data entry. The data entry assistants under the supervision of the team collected the data into the server.
+
+### Statistical analysis
+
+After the data collection, the data was exported to R where statistical analyses were performed. All packages used are cited in the references. The outcome variables for the study were derived from 3 related questions. One question elicited from patients whether they have financial difficulties attending the hospital for routine care. The other 2 questions asked whether there was a financial difficulty acquiring medications or laboratory services.
+
+We built a logistic regression model with the outcome predictor being the expression of financial difficulties as a result of the HBP. We used 450 patient records to build the regression model. We started with the null model added variables and interactions until such a time the model Akaike Information Criterion (AIC) did not significantly change. Once a model was obtained, we used it to predict the outcome for the remaining 36 patients. These steps were repeated until the model successfully predicted the outcome for all 36 patient.
+
+## Results
+
+### Characteristics of patients
+
+```{r}
+library(ggpubr)
+library(gtsummary)
+library(tidyverse)
+uhype <- read_rds("uhype20220905.rds")
+
+theme_gtsummary_compact(font_size = 11)
+gtsummary::theme_gtsummary_printer(print_engine = "flextable")
+```
+
+```{r}
+dems <- uhype %>% 
+  select(site, age, sex, educ, relationship, occup: no_occup, insurance: insurance_type___4, hpt_relative, mbp___1 : mbp___4) %>% 
+  tbl_summary(
+    missing = "no",
+    type = list(
+      everything() ~"categorical",
+      age ~ "continuous"
+    ),
+    digits = everything() ~ c(0, 1)
+  )
+```
+
+There were `r nrow(uhype)` patients recruited into the study. The study participants were recruited from 4 sites in the Kumasi metropolis (@tbl-dem). Most (`r inline_text(dems, variable = site, level = 2)`) were from the Komfo Anokye Teaching hospital. The median (IQR) age of the study participants was `r inline_text(dems, variable = age)`. There were more females than males in the study \[`r inline_text(dems, variable = sex, level = 1)`\]. Only `r inline_text(dems, variable = educ, level = 5)` had had a tertiary education and only a further `r inline_text(dems, variable = educ, level = 4)` had had post secondary/high school education. The majority of the patient, `r inline_text(dems, variable = educ, level = 2)`, had primary to junior high school education. The rest had had no formal education or had not completed primary education \[`r inline_text(dems, variable = educ, level = 1)`\]. Most, `r inline_text(dems, variable = relationship, level = "Partnership")`, of the patients had partner (married or cohabiting). Of the `r inline_text(dems, variable = occup)` that were engaged in an occupational activity, most of them, `r inline_text(dems, variable = occup_type, level = 2)`, were engaged in informal employment. For those that were not working, `r inline_text(dems, variable = no_occup, level = 2)` attributed the situation to ill-health, `r inline_text(dems, variable = no_occup, level = 1)` were on retirement and `r inline_text(dems, variable = no_occup, level = 3)` had other non-specific reasons. Almost all of the patients, `r inline_text(dems, variable = insurance, level = 1)`, had an insurance coverage the majority \[`r inline_text(dems, variable = insurance_type___1, level = 2)`\] of whom were NHIS subscribers. Very few \[`r inline_text(dems, variable = insurance_type___2, level = "Yes")`\] of the patients had a private insurance scheme, of whom 2 were NHIS subscribers already. The only person that had and employee paid program also had an NHIS subscription. Most \[`r inline_text(dems, variable = hpt_relative, level = "Yes")`\] of the patients knew at least one other family member that also had HBP, \[`r inline_text(dems, variable = hpt_relative, level = 3)`\]
+
+Only `r inline_text(dems, variable = mbp___1, level = "Yes")` of the participants checked their BPs using a device they own or had access to in the house while a paltry `r inline_text(dems, variable = mbp___2, level = "Yes")` visited a neighborhood health facility to check their BPs and a further `r inline_text(dems, variable = mbp___3, level = "Yes")` visited pharmachy shops to check their BPs. Only `r inline_text(dems, variable = mbp___4, level = "Yes")` patients indicated they check their BPs with street vendors who carry BP apparatuses around to check for people.
+
+```{r}
+#| label: tbl-dem
+#| tbl-cap: "Demographic characteristics of patients"
+
+dems
+```
+
+### General risks and exposures
+
+```{r}
+rex <- uhype %>% 
+  select(facilities_attended, more_than_1_facility, hpt_follow_up, med_hsp, same_doctor, hpt_special_clinic, med_runout, meds_concern,  dietician, special_diet, mea_bpm, bp_check_month, miss_appoint, health_rate, herbs_for_hpt, health_rate_after_1yr, comob, related, drugs, detained_12mths, feeling) %>% 
+  tbl_summary(
+    statistic = list(
+      c(more_than_1_facility, facilities_attended) ~ "{median} (min = {min}, max = {max})"
+    ),
+    type = list(
+      c(more_than_1_facility, facilities_attended) ~ "continuous"
+    ),
+    missing = "no"
+  )
+```
+
+Most of the patients visited `r inline_text(rex, variable = facilities_attended)` for their healthcare needs of which `r inline_text(rex, variable = more_than_1_facility)` provided the patients with their BP medications (@tbl-rex). Patients traveled `r inline_text(rex, variable = hpt_follow_up)` minutes to the hospital to attend the facilities for BP management. At the time of the visit, `r inline_text(rex, variable = med_hsp, level = "No")` had not taken their medications but `r inline_text(rex, variable = med_hsp, level = 1)` had taken all their medications before visiting the clinic. When asked how often they saw the same doctor, `r inline_text(rex, variable = same_doctor, level = "Never")` replied they never saw the same doctor, `r inline_text(rex, variable = same_doctor, level = "Sometimes")` said they saw the same doctor sometimes and only `r inline_text(rex, variable = same_doctor, level = "All times")` replied they saw the same doctor all the time. Most of the patients \[`r inline_text(rex, variable = hpt_special_clinic, level = "Yes")`\] said they visited special HPT clinics for their healthcare but `r inline_text(rex, variable = hpt_special_clinic, level = "I don't know")` were not aware whether they visited special clinics or not. Medications stock outs were infrequent among the patients: `r inline_text(rex, variable = med_runout, level = "Few times to never")` indicated they never run out of drugs and not more than 50 patients indicated they run out often or all the time. Few, `r inline_text(rex, variable = meds_concern)`, patients expressed concerns with the drugs. Not many \[`r inline_text(rex, variable = dietician)`\] patients had consulted a dietitian for their BP control and a paltry `r inline_text(rex, variable = special_diet)` patients were on a special diet for BP control. Only `r inline_text(rex, variable = mea_bpm)` checked their BP in between visits and the median (IQR) number of times the patients checked their BP in between scheduled visits were `r inline_text(rex, variable = bp_check_month)`. Compliance with scheduled appointment was very high, `r inline_text(rex, variable = miss_appoint, level = 1)` and not more than 30 patients indicated some level of a high frequency of missing appointments. When the patients were asked about their perceived state of health, the majority of the patients indicated their health was between good to excellent with just about 20% indicating their health was either fair or poor. Notably, `r inline_text(rex, variable = herbs_for_hpt)` of the patients utilized herbal medications. On comparison of their current health with their health a year ago, about 200 of them expressed sentiments suggesting it was better. About a third of them suggested their perception of health was same compared to a year ago. For about 70% of the patients, their perceived perception was worse compared to a year ago.
+
+Only `r inline_text(rex, variable = comob, level = "None")` patients that did not have an existing comorbidity, the majority, `r inline_text(rex, variable = comob, level = "One")` had a comorbidity. A further `r inline_text(rex, variable = comob, level = "Two")` had 2 co-morbidities and `r inline_text(rex, variable = comob, level = "More than 2")` had more than 2 comorbidities. Of the comorbidites identified. Of the comobidities identified, `r inline_text(rex, variable = related)` of the patients had a comorbidity that high a high risk of a cardio-vascular accident in patients (diabetes, stroke, chronic kidney failure and heart failure). Most, `r inline_text(rex, variable = drugs, level = "More than 2")` the patients were on more than 2 medications for their hypertension management, `r inline_text(rex, variable = drugs, level = "Two")` were on exactly 2 medications and `r inline_text(rex, variable = drugs, level = "One")` were on a single medication for the BP control. Of the total number of patients interviewed, `r inline_text(rex, variable = detained_12mths)` had been admitted in a hospital within the last year on accounts of high blood pressure.
+
+```{r #rexes}
+#| label: tbl-rex
+#| tbl-cap: General Financial risks and exposures
+
+rex
+```
+
+### Financial exposure
+
+```{r}
+outs <- uhype %>% 
+  select(ins_type___1:ins_type___2, miss_appoint, financial_difficulties, lab_test, bp_meds_buy, diff_get_drugs, med_runout,contains("bp_meds__"), systol) %>% 
+  tbl_summary(
+    digits = everything() ~ c(0, 2)
+  )
+```
+
+Most, `r inline_text(outs, variable = ins_type___1)` of the patients reported to the facility on the day of the interaction with their NHIS for healthcare and `r inline_text(outs, variable = ins_type___2)` of the patients reported with a private health insurance. Of the 2 patients that reported with the private health insurance, it was in addition to the NHIS, which they already had. Most of the patients complied with their review schedules (revisits), `r inline_text(outs, variable = miss_appoint, level = "Few times to never")`. Some of the patients \[`r inline_text(outs, variable = financial_difficulties)`\] responded affirmative to having financial difficulties attending the health facility for healthcare. A greater majority of the patients indicated they experienced financial difficulties accessing laboratory services, `r inline_text(outs, variable = lab_test)`. Again, `r inline_text(outs, variable = bp_meds_buy)` of the patients indicated they experienced challenges paying for their BP medications when they visited the facility of which `r inline_text(outs, variable = diff_get_drugs, level = "Less than half the time")` indicated they experienced the challenges less than half the time but `r inline_text(outs, variable = diff_get_drugs, level = "About half the time")` of the patients indicated they experienced the challenges about half the time, and `r inline_text(outs, variable = miss_appoint, level = "Sometimes to all the time")` patients indicated they experienced financial difficulties all the time paying for their drugs. Most of the patients \[`r inline_text(outs, variable = med_runout, level = "Few times to never")`\], responded they run out of drugs few times to never while `r inline_text(outs, variable = med_runout, level = "Sometimes to all the time")` of the patients said the run out sometimes to all the time. On their current visit to the hospital, `r inline_text(outs, variable = bp_meds___1)` patients had paid for their drugs entirely with their health insurance while `r inline_text(outs, variable = bp_meds___2)` patients made co-payments for their drugs. There were `r inline_text(outs, variable = bp_meds___3)` patients who paid completely OOP. The median of the average temperature of the patients (resting BP taken 3 times 5 minutes apart) was `r inline_text(outs, variable = systol)`mm/Hg.
+
+```{r}
+outs
+```

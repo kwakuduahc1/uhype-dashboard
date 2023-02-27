@@ -56,3 +56,14 @@ uhype %>%
     )
   )
 # (((Ghana) AND ((Hypertension) OR (High Blood Pressure)) AND (Expenditure))[Abstract])
+
+uhype %>% 
+  select(id, systol, redcap_repeat_instance) %>% 
+  drop_na() %>% 
+  group_by(id) %>% 
+  summarise(
+    systol = mean(systol)
+  )
+
+
+  

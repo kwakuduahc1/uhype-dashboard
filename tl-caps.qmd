@@ -17,7 +17,7 @@ See @mytable will not work
 #| label: tbl-mytable
 #| tbl-cap: "My wonderful table"
 
-mtcars |> head() |> knitr::kable()
+mtcars |> head() |> gt::gt()
 
 ```
 

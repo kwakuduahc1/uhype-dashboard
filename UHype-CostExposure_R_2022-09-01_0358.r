@@ -2,13 +2,22 @@
 library(Hmisc)
 library(tidyverse)
 #Read Data
-uhype=read.csv('UHype-CostExposure_DATA_2022-09-01_0358.csv')
+uhype=read.csv('UHype-CostExposure_DATA_2022-09-03_1317.csv')
 #Setting Labels
 
 #uhype <- 
 uhype <- (uhype %>% 
   filter(redcap_repeat_instrument == "") %>% 
-  select(-c(providers_comment___1:current_med___13), -contains("redcap"))) %>% 
+  select(-c(providers_comment___1:current_med___13, systol), -contains("redcap"))) %>% 
+  full_join(
+    uhype %>% 
+      select(id, systol) %>% 
+      drop_na() %>% 
+      group_by(id) %>% 
+      summarise(
+        systol = mean(systol)
+      )
+  ) %>% 
   full_join(
      uhype %>% 
   filter(redcap_repeat_instrument != "") %>% 
@@ -28,11 +37,11 @@ uhype <- (uhype %>%
   mutate(
     comob = if_else(comorbidity > 2, 3L, comorbidity),
     comob = factor(comob, levels = 0:3, labels = c("None", "One", "Two", "More than 2")),
-    drugs = if_else(multidrug > 2, 3L, multidrug),
-    drugs = factor(drugs, labels = c("No", "One", "Two", "More than 2"), levels = 0:3),
+    drugs = if_else(multidrug == 0, 1L, if_else(multidrug > 2, 3L, multidrug)),
+    drugs = factor(drugs, labels = c("One", "Two", "More than 2"), levels = 1:3),
     related = chronic_med___1 + chronic_med___2 + chronic_med___3 + chronic_med___4,
     related = if_else(related > 1, 1L, related),
-    related = factor(related, labels = c("Yes", "No"), levels = 1:0),
+    related = factor(related, labels = c("No", "Yes"), levels = 0:1),
     feeling = (safe/3) >= (worry/7),
     feeling = factor(feeling, labels = c("Postive", "Negative"), levels = c(T,F))
   ) 
@@ -40,28 +49,28 @@ uhype <- (uhype %>%
 #Setting Factors(will create new variable for factors)
 uhype$sex = factor(uhype$sex,levels=c("1","2"))
 uhype$relationship = factor(uhype$relationship,levels=c("1","2","3","4","5"))
-uhype$occup = factor(uhype$occup,levels=c("1","0"))
+uhype$occup = factor(uhype$occup,levels=c("Yes", "No"))
 uhype$occup_type = factor(uhype$occup_type,levels=c("1","2"))
 uhype$no_occup = factor(uhype$no_occup,levels=c("1","8","2","3","4","5","6","7"))
 uhype$educ = factor(uhype$educ,levels=c("1","2","3","4","5","6","7","8","9","10","11"))
-uhype$insurance = factor(uhype$insurance,levels=c("1","0"))
+uhype$insurance = factor(uhype$insurance,levels=c("Yes", "No"))
 uhype$insurance_type___1 = factor(uhype$insurance_type___1,levels=c("0","1"))
 uhype$insurance_type___2 = factor(uhype$insurance_type___2,levels=c("0","1"))
 uhype$insurance_type___3 = factor(uhype$insurance_type___3,levels=c("0","1"))
 uhype$insurance_type___4 = factor(uhype$insurance_type___4,levels=c("0","1"))
-uhype$detained_12mths = factor(uhype$detained_12mths,levels=c("1","0"))
+uhype$detained_12mths = factor(uhype$detained_12mths,levels=c("Yes", "No"))
 uhype$mbp___1 = factor(uhype$mbp___1,levels=c("0","1"))
 uhype$mbp___2 = factor(uhype$mbp___2,levels=c("0","1"))
 uhype$mbp___3 = factor(uhype$mbp___3,levels=c("0","1"))
 uhype$mbp___4 = factor(uhype$mbp___4,levels=c("0","1"))
-uhype$hpt_relative = factor(uhype$hpt_relative,levels=c("1","2","0"))
+uhype$hpt_relative = factor(uhype$hpt_relative,levels=c("0", "1","2"))
 uhype$med_hsp = factor(uhype$med_hsp,levels=c("1","2","0"))
 uhype$bp_meds___1 = factor(uhype$bp_meds___1,levels=c("0","1"))
 uhype$bp_meds___2 = factor(uhype$bp_meds___2,levels=c("0","1"))
 uhype$bp_meds___3 = factor(uhype$bp_meds___3,levels=c("0","1"))
 uhype$bp_meds_buy = factor(uhype$bp_meds_buy,levels=c("1","2"))
 uhype$lab_test = factor(uhype$lab_test,levels=c("0","1"))
-uhype$insu_bp_visit = factor(uhype$insu_bp_visit,levels=c("1","0"))
+uhype$insu_bp_visit = factor(uhype$insu_bp_visit,levels=c("Yes", "No"))
 uhype$ins_type___1 = factor(uhype$ins_type___1,levels=c("0","1"))
 uhype$ins_type___2 = factor(uhype$ins_type___2,levels=c("0","1"))
 uhype$ins_type___3 = factor(uhype$ins_type___3,levels=c("0","1"))
@@ -69,17 +78,17 @@ uhype$ins_type___4 = factor(uhype$ins_type___4,levels=c("0","1"))
 uhype$same_doctor = factor(uhype$same_doctor,levels=c("0","1","2","3","4"))
 uhype$hpt_special_clinic = factor(uhype$hpt_special_clinic,levels=c("1","0","2"))
 uhype$med_runout = factor(uhype$med_runout,levels=c("0","1","2","3","4"))
-uhype$financial_difficulties = factor(uhype$financial_difficulties,levels=c("1","0"))
+uhype$financial_difficulties = factor(uhype$financial_difficulties,levels=c("Yes", "No"))
 uhype$diff_get_drugs = factor(uhype$diff_get_drugs,levels=c("1","2","3"))
-uhype$meds_concern = factor(uhype$meds_concern,levels=c("1","0"))
+uhype$meds_concern = factor(uhype$meds_concern,levels=c("Yes", "No"))
 uhype$meds_concern_reason = factor(uhype$meds_concern_reason,levels=c("1","2","3","4","5"))
-uhype$herbs_for_hpt = factor(uhype$herbs_for_hpt,levels=c("1","0"))
-uhype$special_diet = factor(uhype$special_diet,levels=c("1","0"))
-uhype$mea_bpm = factor(uhype$mea_bpm,levels=c("1","0"))
+uhype$herbs_for_hpt = factor(uhype$herbs_for_hpt,levels=c("Yes", "No"))
+uhype$special_diet = factor(uhype$special_diet,levels=c("Yes", "No"))
+uhype$mea_bpm = factor(uhype$mea_bpm,levels=c("Yes", "No"))
 uhype$bp_counsel_other_staff = factor(uhype$bp_counsel_other_staff,levels=c("0","1","2","3","4"))
 uhype$miss_appoint = factor(uhype$miss_appoint,levels=c("0","1","2","3","4"))
 uhype$reasons_for_herbs = factor(uhype$reasons_for_herbs,levels=c("1","2","3","4","5"))
-uhype$dietician = factor(uhype$dietician,levels=c("1","0"))
+uhype$dietician = factor(uhype$dietician,levels=c("Yes", "No"))
 uhype$health_rate = factor(uhype$health_rate,levels=c("5","4","3","2","1"))
 uhype$health_rate_after_1yr = factor(uhype$health_rate_after_1yr,levels=c("5","4","3","2","1"))
 uhype$hpt_reactions___1 = factor(uhype$hpt_reactions___1,levels=c("0","1"))
@@ -127,46 +136,46 @@ uhype$current_med___13 = factor(uhype$current_med___13,levels=c("0","1"))
 
 levels(uhype$sex)=c("Female","Male")
 levels(uhype$relationship)=c("Single","Married","Separated","Co-habiting","Widowed")
-levels(uhype$occup)=c("Yes","No")
+levels(uhype$occup)=c("No","Yes")
 levels(uhype$occup_type)=c("Formal sector","Informal sector")
 levels(uhype$no_occup)=c("Student","Unemployed","Retired","Ill-health","Lack of interest in working","No reason to work","Legal reason","Other")
 levels(uhype$educ)=c("None or did not complete primary","Completed primary","Completed JHS","Completed SHS","Post-secondary Certificate or Diploma","Completed college","Technical","Vocational","O level","A level","Form 4")
-levels(uhype$insurance)=c("Yes","No")
+levels(uhype$insurance)=c("No","Yes")
 levels(uhype$insurance_type___1)=c("No","Yes")
 levels(uhype$insurance_type___2)=c("No","Yes")
 levels(uhype$insurance_type___3)=c("No","Yes")
 levels(uhype$insurance_type___4)=c("No","Yes")
-levels(uhype$detained_12mths)=c("Yes","No")
+levels(uhype$detained_12mths)=c("No","Yes")
 levels(uhype$mbp___1)=c("No","Yes")
 levels(uhype$mbp___2)=c("No","Yes")
 levels(uhype$mbp___3)=c("No","Yes")
 levels(uhype$mbp___4)=c("No","Yes")
-levels(uhype$hpt_relative)=c("Yes","I dont know","No")
+levels(uhype$hpt_relative)=c("No", "Yes","No idea")
 levels(uhype$med_hsp)=c("Yes (All of them)","Yes (Some of them)","No")
 levels(uhype$bp_meds___1)=c("No","Yes")
 levels(uhype$bp_meds___2)=c("No","Yes")
 levels(uhype$bp_meds___3)=c("No","Yes")
-levels(uhype$bp_meds_buy)=c("Yes","No")
+levels(uhype$bp_meds_buy)=c("No","Yes")
 levels(uhype$lab_test)=c("No","Yes")
-levels(uhype$insu_bp_visit)=c("Yes","No")
+levels(uhype$insu_bp_visit)=c("No","Yes")
 levels(uhype$ins_type___1)=c("No","Yes")
 levels(uhype$ins_type___2)=c("No","Yes")
 levels(uhype$ins_type___3)=c("No","Yes")
 levels(uhype$ins_type___4)=c("No","Yes")
-levels(uhype$same_doctor)=c("Never","Few times","Some times","Most times","All times")
-levels(uhype$hpt_special_clinic)=c("Yes","No","I dont know")
-levels(uhype$med_runout)=c("Never","Few times","Some times","Most times","All times")
-levels(uhype$financial_difficulties)=c("Yes","No")
+levels(uhype$same_doctor)=c("Never","Few times","Sometimes","Most times","All times")
+levels(uhype$hpt_special_clinic)=c("Yes","No","I don't know")
+levels(uhype$med_runout)=c("Never","Few times","Sometimes","Most times","All times")
+levels(uhype$financial_difficulties)=c("No","Yes")
 levels(uhype$diff_get_drugs)=c("Less than half the time","About half the time","All the time")
-levels(uhype$meds_concern)=c("Yes","No")
+levels(uhype$meds_concern)=c("No","Yes")
 levels(uhype$meds_concern_reason)=c("Reactions to drugs","Frequently forget","No improvement","I Have been told it is not safe to take it all the time","Other")
-levels(uhype$herbs_for_hpt)=c("Yes","No")
-levels(uhype$special_diet)=c("Yes","No")
-levels(uhype$mea_bpm)=c("Yes","No")
-levels(uhype$bp_counsel_other_staff)=c("Never","Few times","Some times","Most times","All times")
-levels(uhype$miss_appoint)=c("Never","Few times","Some times","Most times","All times")
+levels(uhype$herbs_for_hpt)=c("No","Yes")
+levels(uhype$special_diet)=c("No","Yes")
+levels(uhype$mea_bpm)=c("No","Yes")
+levels(uhype$bp_counsel_other_staff)=c("Never","Few times","Sometimes","Most times","All times")
+levels(uhype$miss_appoint)=c("Never","Few times","Sometimes","Most times","All times")
 levels(uhype$reasons_for_herbs)=c("Advice from friends and relatives","Advertisement on mass media","Self decision","Advice from health professionals","Other reasons")
-levels(uhype$dietician)=c("Yes","No")
+levels(uhype$dietician)=c("No","Yes")
 levels(uhype$health_rate)=c("Excellent","Very Good","Good","Fair","Poor")
 levels(uhype$health_rate_after_1yr)=c("Much better now than one year ago","Somewhat better now than one year ago","About the same","Somewhat worse now than one year ago","Much worse than one year ago")
 levels(uhype$hpt_reactions___1)=c("No","Yes")
@@ -226,6 +235,27 @@ uhype <- uhype %>%
       "Primary school and JHS" = c("Completed JHS", "Completed primary"),
       "Senior/Technical/Vocation/Middle school" = c("Completed SHS", "Vocational", "O level", "A level", "Form 4", "Technical"),
       "Tertiary" = "Completed college"
+    ),
+    systol = if_else(systol > 200, 200, systol),
+    across(c(miss_appoint, med_runout), ~fct_collapse(., 
+                                "Few times to never" = c("Never", "Few times"),
+                                "Sometimes to all the time" = c("Sometimes", "Most times", "All times")
+                                )),
+    usage = case_when(
+      bp_meds___1 == "Yes" ~ "NHIS covered",
+      bp_meds___2 == "Yes" ~ "Co-payment",
+      bp_meds___3 == "Yes" ~ "OOP"
+    ),
+    usage =  fct_relevel(usage, "NHIS covered", "Co-payment", "OOP"),
+    across(c(bp_meds_buy, occup), fct_relevel, "No", "Yes"),
+    educ = fct_collapse(
+      educ,
+      "No secondary education" = c("None or did not complete primary", "Primary school and JHS"),
+      "Secondary school or higher" = c(
+        "Senior/Technical/Vocation/Middle school",
+        "Post-secondary Certificate or Diploma",
+        "Tertiary"
+      )
     )
   )
 
@@ -266,7 +296,7 @@ label(uhype$more_than_1_facility)="Facilities providing BP meds"
 label(uhype$same_doctor)="Same doctor"
 label(uhype$hpt_special_clinic)="Special clinics"
 label(uhype$med_runout)="Stock outs"
-label(uhype$financial_difficulties)="Financial difficulties acquiring medication"
+label(uhype$financial_difficulties)="Financial difficulties during health visitation"
 label(uhype$diff_get_drugs)="Frequency of financial difficulty"
 label(uhype$meds_concern)="Concerns about drugs"
 label(uhype$meds_concern_reason)="Concerns"
@@ -277,9 +307,9 @@ label(uhype$mea_bpm)="Measure BP between visits"
 label(uhype$bp_check_month)="BP checks in a month"
 label(uhype$bp_counsel_other_staff)="HCW counseling"
 label(uhype$miss_appoint)="Missed appointments"
-label(uhype$hpt_follow_up)="Distance to facility (km)"
+label(uhype$hpt_follow_up)="Time to facility(minutes)"
 label(uhype$reasons_for_herbs)="Reason for herbal"
-label(uhype$dietician)="Dieticiand for BP control"
+label(uhype$dietician)="Dietician"
 label(uhype$health_rate)="State of health"
 label(uhype$health_rate_after_1yr)="State of health a year ago"
 label(uhype$hpt_reactions___1)="Worried about stroke"
@@ -290,8 +320,8 @@ label(uhype$hpt_reactions___5)="Worried about kidney problems"
 label(uhype$hpt_reactions___6)="Worried about death"
 label(uhype$hpt_reactions___7)= "Sadness"
 label(uhype$hpt_reactions___8)="Not worried"
-label(uhype$hpt_reactions___9)="Not worried due to controlled BP"
-label(uhype$hpt_reactions___10)="Not worried due to regula check-up"
+label(uhype$hpt_reactions___9)="Unworried due to controlled BP"
+label(uhype$hpt_reactions___10)="Unworried due to regular check-up"
 label(uhype$providers_comment___1)="Controlled BP"
 label(uhype$providers_comment___2)="Uncontrolled"
 label(uhype$providers_comment___3)="Medication non-adherence"
@@ -334,4 +364,13 @@ label(uhype$drugs)="Multi-drug treatment"
 label(uhype$safe)="Feeling of safety"
 label(uhype$worry)="Worried about condtion"
 label(uhype$feeling)="Computed general feeling"
+label(uhype$systol) = "Average Systolic Blood Pressure (mm/Hg)"
+label(uhype$usage) = "Mode of payment"
 #Setting Units
+
+uhype %>% 
+write_rds(
+  file = str_replace_all(paste("uhype", Sys.Date(),".rds", sep = ""),  
+                         "-",
+                         "")
+)
