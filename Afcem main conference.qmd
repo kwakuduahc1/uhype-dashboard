@@ -1,0 +1,131 @@
+---
+title: "AfCem Conference"
+author: "Emergency Medicine"
+warning: false
+error: false
+echo: false
+message: false
+code-tools: false
+format: 
+    html: 
+        self-contained: true
+---
+
+
+```{r}
+library(ggpubr)
+library(tidyverse)
+
+dset <- read_rds("afcem dataset.rds")
+
+clrs <-  c("#CA1230","#CACA12","#34CA12")
+```
+
+## Conference publicity
+
+```{r}
+dset %>% 
+  select(1:8) %>% 
+  pivot_longer(everything()) %>% 
+  mutate(value = fct_lump_min(value, min = 10)) %>% 
+  count(value) %>% 
+  drop_na() %>% 
+  ggbarplot(
+    x = "value", 
+    y = "n", 
+    ylab = "Number", 
+    xlab = "Conference publicity", 
+    sort.val = "asc",
+    fill = clrs[2]) + 
+  coord_flip()
+```
+
+## Conference registration
+
+```{r}
+dset %>% 
+  select(9:11) %>% 
+  pivot_longer(everything()) %>% 
+  count(name, value) %>% 
+  drop_na() %>% 
+  ggbarplot(
+    x = "name", 
+    y = "n", 
+    ylab = "Number", 
+    xlab = "Conference registration", 
+    fill = "value",
+    palette = clrs,
+    legend.title = "Rating"
+    ) + 
+  theme(
+    axis.text.x = element_text(size = 10)
+  )
+```
+
+## Expectations, Knowledge and skills improvement					
+
+```{r}
+dset %>% 
+  select(12:17) %>% 
+  pivot_longer(everything()) %>% 
+  count(name, value) %>% 
+  drop_na() %>% 
+  ggbarplot(
+    x = "name", 
+    y = "n", 
+    ylab = "Number", 
+    xlab = "Items", 
+    fill = "value",
+    palette = clrs,
+    legend.title = "Rating",
+    ) + 
+  theme(
+    axis.text.x = element_text(size = 10)
+  ) + 
+  coord_flip()
+```
+
+## Conference content and presentations
+
+```{r}
+dset %>% 
+  select(18:25) %>% 
+  pivot_longer(everything()) %>% 
+  count(name, value) %>% 
+  drop_na() %>% 
+  ggbarplot(
+    x = "name", 
+    y = "n", 
+    ylab = "Number", 
+    xlab = "Items", 
+    fill = "value",
+    palette = clrs,
+    legend.title = "Rating",
+    ) + 
+  theme(
+    axis.text.x = element_text(size = 10)
+  ) + 
+  coord_flip()
+```
+
+## Conference organisations and logistics
+```{r}
+dset %>% 
+  select(26:ncol(dset)) %>% 
+  pivot_longer(everything()) %>% 
+  count(name, value) %>% 
+  drop_na() %>% 
+  ggbarplot(
+    x = "name", 
+    y = "n", 
+    ylab = "Number", 
+    xlab = "Items", 
+    fill = "value",
+    palette = clrs,
+    legend.title = "Rating",
+    ) + 
+  theme(
+    axis.text.x = element_text(size = 10)
+  ) + 
+  coord_flip()
+```

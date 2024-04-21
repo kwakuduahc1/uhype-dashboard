@@ -1,0 +1,30 @@
+---
+title: "Graphs and inferences"
+format: html
+---
+
+```{r}
+library(gtsummary)
+library(ggpubr)
+library(ggstatsplot)
+library(tidyverse)
+uhype <- read_rds("uhype20220905.rds")
+
+```
+
+
+```{r}
+uhype %>% 
+  select(systol, financial_difficulties) %>% 
+  drop_na() %>% 
+  ggbetweenstats (x = financial_difficulties, y = systol)
+```
+
+
+```{r}
+uhype %>% 
+  select(systol, sex, financial_difficulties) %>% 
+  drop_na() %>% 
+  ggbarstats(x = financial_difficulties, y = sex) #+ 
+  # facet_grid(sex ~ .)
+```

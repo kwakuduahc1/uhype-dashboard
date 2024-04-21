@@ -370,7 +370,4 @@ label(uhype$usage) = "Mode of payment"
 
 uhype %>% 
 write_rds(
-  file = str_replace_all(paste("uhype", Sys.Date(),".rds", sep = ""),  
-                         "-",
-                         "")
-)
+  file = str_replace_all(paste("uhype", Sys.Date(),".rds", sep = ""),  "-",""))
